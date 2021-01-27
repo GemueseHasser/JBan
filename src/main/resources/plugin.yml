@@ -1,0 +1,33 @@
+name: '${project.name}'
+description: '${project.description}'
+version: '${project.version}'
+load: 'POSTWORLD'
+author: 'Jonas0206'
+authors: ['Jonas0206']
+website: '${project.url}'
+main: '${project.groupId}.${project.artifactId}.${project.name}'
+depend: []
+softdepend: []
+api-version: '1.13'
+loadbefore: []
+prefix: '${project.name}'
+
+commands:
+  ban:
+    description: 'Bannt einen Spieler'
+    usage: '</command> <player> <reason>'
+  kick:
+    description: 'Kickt einen Spieler'
+    usage: '</command> <player> <reason>'
+  mute:
+    description: 'Mutet einen Spieler'
+    usage: '</command> <player> <reason>'
+  warn:
+    description: 'warnt einen Spieler'
+    usage: '</command> <player> <reason>'
+  unban:
+    description: 'Entbannt einen Spieler'
+    usage: '</command> <player>'
+  unmute:
+    description: 'Entmuted einen Spieler'
+    usage: '</command> <player>'

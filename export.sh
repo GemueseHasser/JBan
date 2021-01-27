@@ -1,0 +1,1 @@
+mv /home/jonas/Dokumente/Java-Projekte/JBan/target/JBan.jar /home/jonas/Desktop/localServer/plugins
