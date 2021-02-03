@@ -29,6 +29,7 @@ public class TempMute implements CommandExecutor {
     private static final int EMPTY_MESSAGES = 100;
     //</editor-fold>
 
+
     //<editor-fold desc="implementation">
     @Override
     @SneakyThrows
