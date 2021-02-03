@@ -34,3 +34,6 @@ commands:
   tempban:
     description: 'Bannt einen Spieler für eine gewisse Zeit'
     usage: '</command> <player> <hours> <reason>'
+  tempmute:
+    description: 'Mutet einen Spieler für eine gewisse Zeit'
+    usage: '</command> <player> <hours> <reason>'

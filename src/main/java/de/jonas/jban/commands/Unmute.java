@@ -43,15 +43,20 @@ public class Unmute implements CommandExecutor {
         File file = new File("plugins/JBan", "muted.yml");
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
+        File fileTemp = new File("plugins/JBan", "tempMuted.yml");
+        FileConfiguration cfgTemp = YamlConfiguration.loadConfiguration(fileTemp);
+
         // check if player is muted
-        if (cfg.getString(args[0]) == null) {
+        if (cfg.getString(args[0]) == null && cfgTemp.getString(args[0] + ".reason") == null) {
             sender.sendMessage(PREFIX + "Der Spieler ist nicht gemuted!");
             return true;
         }
 
         // remove player from muted players
         cfg.set(args[0], null);
+        cfgTemp.set(args[0], null);
         cfg.save(file);
+        cfgTemp.save(fileTemp);
 
         // send done-message
         sender.sendMessage(PREFIX + "Du hast den Spieler " + ChatColor.DARK_GRAY + args[0]

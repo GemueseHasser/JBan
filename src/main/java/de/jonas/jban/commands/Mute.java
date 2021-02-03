@@ -66,7 +66,7 @@ public class Mute implements CommandExecutor {
 
         // form reason
         for (int i = 1; i < args.length; i++) {
-            reason.append(args[i]).append(" ");
+            reason.append(" ").append(args[i]);
         }
 
         cfg.set(target.getName(), reason.toString());

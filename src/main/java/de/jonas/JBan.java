@@ -4,6 +4,7 @@ import de.jonas.jban.commands.Ban;
 import de.jonas.jban.commands.Kick;
 import de.jonas.jban.commands.Mute;
 import de.jonas.jban.commands.TempBan;
+import de.jonas.jban.commands.TempMute;
 import de.jonas.jban.commands.Unban;
 import de.jonas.jban.commands.Unmute;
 import de.jonas.jban.commands.Warn;
@@ -58,6 +59,7 @@ public class JBan extends JavaPlugin {
         Objects.requireNonNull(getCommand("unban")).setExecutor(new Unban());
         Objects.requireNonNull(getCommand("unmute")).setExecutor(new Unmute());
         Objects.requireNonNull(getCommand("tempban")).setExecutor(new TempBan());
+        Objects.requireNonNull(getCommand("tempmute")).setExecutor(new TempMute());
 
         // register listener
         PluginManager pm = Bukkit.getPluginManager();
