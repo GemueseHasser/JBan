@@ -31,3 +31,6 @@ commands:
   unmute:
     description: 'Entmuted einen Spieler'
     usage: '</command> <player>'
+  tempban:
+    description: 'Bannt einen Spieler für eine gewisse Zeit'
+    usage: '</command> <player> <hours> <reason>'

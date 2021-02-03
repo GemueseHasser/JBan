@@ -40,18 +40,23 @@ public class Unban implements CommandExecutor {
             return true;
         }
 
-        File file = new File("plugins/JBan", "banned.yml");
-        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+        final File file = new File("plugins/JBan", "banned.yml");
+        final FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+
+        final File fileTemp = new File("plugins/JBan", "tempBanned.yml");
+        final FileConfiguration cfgTemp = YamlConfiguration.loadConfiguration(fileTemp);
 
         // check if player is banned
-        if (cfg.getString(args[0]) == null) {
+        if (cfg.getString(args[0]) == null && cfgTemp.getString(args[0] + ".reason") == null) {
             sender.sendMessage(PREFIX + "Der Spieler ist nicht gebannt!");
             return true;
         }
 
         // remove player from banned players
         cfg.set(args[0], null);
+        cfgTemp.set(args[0], null);
         cfg.save(file);
+        cfgTemp.save(fileTemp);
 
         // send done-message
         sender.sendMessage(PREFIX + "Du hast den Spieler " + ChatColor.DARK_GRAY + args[0]

@@ -32,11 +32,11 @@ public class OnChat implements Listener {
             return;
         }
 
+        final String reason = cfg.getString(name);
+
         e.setCancelled(true);
         e.getPlayer().sendMessage(
-            PREFIX + "Du bist gemutet (für \""
-            + Objects.requireNonNull(cfg.getString(name)).substring(1)
-            + "\")"
+            PREFIX + "Du bist gemutet (für \"" + reason + "\")"
         );
     }
     //</editor-fold>

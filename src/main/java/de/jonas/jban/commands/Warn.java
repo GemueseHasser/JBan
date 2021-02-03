@@ -44,7 +44,7 @@ public class Warn implements CommandExecutor {
 
         Player target = Bukkit.getPlayer(args[0]);
 
-        if (target == null) {
+        if (target == null || !target.isOnline()) {
             sender.sendMessage(PREFIX + "Der Spieler ist nicht online!");
             return true;
         }
@@ -52,7 +52,7 @@ public class Warn implements CommandExecutor {
         StringBuilder reason = new StringBuilder();
 
         for (int i = 1; i < args.length; i++) {
-            reason.append(" ").append(args[i]);
+            reason.append(args[i]).append(" ");
         }
 
         for (int i1 = 0; i1 < EMPTY_MESSAGES; i1++) {

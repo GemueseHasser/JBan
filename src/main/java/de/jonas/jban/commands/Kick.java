@@ -39,7 +39,7 @@ public class Kick implements CommandExecutor {
         Player target = Bukkit.getPlayer(args[0]);
 
         // check if kicked player is online
-        if (target == null) {
+        if (target == null || !target.isOnline()) {
             sender.sendMessage(PREFIX + "Der Spieler ist nicht online!");
             return true;
         }
@@ -48,7 +48,7 @@ public class Kick implements CommandExecutor {
 
         // form reason
         for (int i = 1; i < args.length; i++) {
-            reason.append(" ").append(args[i]);
+            reason.append(args[i]).append(" ");
         }
 
         // kick player
