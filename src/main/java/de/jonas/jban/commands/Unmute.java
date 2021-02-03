@@ -40,11 +40,11 @@ public class Unmute implements CommandExecutor {
             return true;
         }
 
-        File file = new File("plugins/JBan", "muted.yml");
-        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+        final File file = new File("plugins/JBan", "muted.yml");
+        final FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-        File fileTemp = new File("plugins/JBan", "tempMuted.yml");
-        FileConfiguration cfgTemp = YamlConfiguration.loadConfiguration(fileTemp);
+        final File fileTemp = new File("plugins/JBan", "tempMuted.yml");
+        final FileConfiguration cfgTemp = YamlConfiguration.loadConfiguration(fileTemp);
 
         // check if player is muted
         if (cfg.getString(args[0]) == null && cfgTemp.getString(args[0] + ".reason") == null) {

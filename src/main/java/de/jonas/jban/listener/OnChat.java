@@ -18,8 +18,8 @@ import java.time.Instant;
 import static de.jonas.JBan.PREFIX;
 
 /**
- * Das {@link Event Event}, mit dem das Nachrichten-Schreiben verhindert wird, wenn ein
- * {@link Player Spieler} gemuted ist.
+ * Das {@link Event Event}, mit dem das Nachrichten-Schreiben verhindert wird, wenn ein {@link Player Spieler} gemuted
+ * ist.
  */
 public class OnChat implements Listener {
 
@@ -27,18 +27,21 @@ public class OnChat implements Listener {
     @SneakyThrows
     @EventHandler
     public void onChat(@NotNull final AsyncPlayerChatEvent e) {
-        String name = e.getPlayer().getName();
+        // declare players name
+        final String name = e.getPlayer().getName();
 
-        File file = new File("plugins/JBan", "muted.yml");
-        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+        final File file = new File("plugins/JBan", "muted.yml");
+        final FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-        File fileTemp = new File("plugins/JBan", "tempMuted.yml");
-        FileConfiguration cfgTemp = YamlConfiguration.loadConfiguration(fileTemp);
+        final File fileTemp = new File("plugins/JBan", "tempMuted.yml");
+        final FileConfiguration cfgTemp = YamlConfiguration.loadConfiguration(fileTemp);
 
+        // check if player is muted
         if (cfg.getString(name) == null && cfgTemp.getString(name + ".reason") == null) {
             return;
         }
 
+        // check if player is just temporary muted
         if (cfgTemp.getString(name + ".reason") != null) {
             final String mutedPointString = cfgTemp.getString(name + ".mutePoint");
             assert mutedPointString != null;
@@ -63,6 +66,7 @@ public class OnChat implements Listener {
 
         final String reason = cfg.getString(name);
 
+        // player is permanent muted
         e.setCancelled(true);
         e.getPlayer().sendMessage(
             PREFIX + "Du bist " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "permanent"
@@ -72,6 +76,13 @@ public class OnChat implements Listener {
     }
     //</editor-fold>
 
+    /**
+     * Berechnet die {@link Duration Dauer}, zwischen einem gewissen {@link Instant} und jetzt.
+     *
+     * @param instant Der {@link Instant}, von dem die Dauer bis jetzt berechnet wird.
+     *
+     * @return Die {@link Duration Dauer} zwischen den beiden {@link Instant Instants}.
+     */
     private Duration getDuration(Instant instant) {
         return Duration.between(instant, Instant.now());
     }

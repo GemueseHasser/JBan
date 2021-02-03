@@ -16,7 +16,11 @@ import java.time.Instant;
 
 import static de.jonas.JBan.PREFIX;
 
+/**
+ * Implementiert den Command, mit dem {@link Player Spieler} für eine gewisse Zeit gebannt werden.
+ */
 public class TempBan implements CommandExecutor {
+    //<editor-fold desc="implementation">
     @Override
     @SneakyThrows
     public boolean onCommand(
@@ -37,27 +41,27 @@ public class TempBan implements CommandExecutor {
             return true;
         }
 
-        // declare banned player
-        Player target = Bukkit.getPlayer(args[0]);
+        // declare temporary-banned player
+        final Player target = Bukkit.getPlayer(args[0]);
 
         final double hours = Double.parseDouble(args[1].replace(",", "."));
 
-        // check if banned player is null
+        // check if temporary-banned player is null
         if (target == null || !target.isOnline()) {
             sender.sendMessage(PREFIX + "Der Spieler ist nicht online!");
             return true;
         }
 
-        StringBuilder reason = new StringBuilder();
+        final StringBuilder reason = new StringBuilder();
 
         // form reason
         for (int i = 2; i < args.length; i++) {
             reason.append(args[i]).append(" ");
         }
 
-        // write player into banned players
-        File file = new File("plugins/JBan", "tempBanned.yml");
-        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+        // write player into temporary-banned players
+        final File file = new File("plugins/JBan", "tempBanned.yml");
+        final FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
         cfg.set(target.getName() + ".reason", reason.toString());
         cfg.set(target.getName() + ".bannedPoint", Instant.now().toString());
         cfg.set(target.getName() + ".hours", hours);
@@ -76,4 +80,5 @@ public class TempBan implements CommandExecutor {
             + (hours == 1 ? " Stunde gebannt!" : " Stunden gebannt!"));
         return true;
     }
+    //</editor-fold>
 }

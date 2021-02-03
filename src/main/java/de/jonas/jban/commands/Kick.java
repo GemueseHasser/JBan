@@ -36,7 +36,7 @@ public class Kick implements CommandExecutor {
         }
 
         // declare kicked player
-        Player target = Bukkit.getPlayer(args[0]);
+        final Player target = Bukkit.getPlayer(args[0]);
 
         // check if kicked player is online
         if (target == null || !target.isOnline()) {
@@ -44,7 +44,7 @@ public class Kick implements CommandExecutor {
             return true;
         }
 
-        StringBuilder reason = new StringBuilder();
+        final StringBuilder reason = new StringBuilder();
 
         // form reason
         for (int i = 1; i < args.length; i++) {

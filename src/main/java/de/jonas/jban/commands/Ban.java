@@ -16,10 +16,10 @@ import java.io.File;
 import static de.jonas.JBan.PREFIX;
 
 /**
- * Implementiert den Command, mit dem {@link Player Spieler} gebannt werden.
+ * Implementiert den Command, mit dem {@link Player Spieler} permanent gebannt werden.
  */
 public class Ban implements CommandExecutor {
-    
+
     //<editor-fold desc="implementation">
     @Override
     @SneakyThrows
@@ -42,15 +42,15 @@ public class Ban implements CommandExecutor {
         }
 
         // declare banned player
-        Player target = Bukkit.getPlayer(args[0]);
+        final Player target = Bukkit.getPlayer(args[0]);
 
-        // check if banned player is null
+        // check if banned player is online
         if (target == null || !target.isOnline()) {
             sender.sendMessage(PREFIX + "Der Spieler ist nicht online!");
             return true;
         }
 
-        StringBuilder reason = new StringBuilder();
+        final StringBuilder reason = new StringBuilder();
 
         // form reason
         for (int i = 1; i < args.length; i++) {

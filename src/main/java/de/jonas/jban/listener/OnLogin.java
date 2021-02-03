@@ -25,18 +25,21 @@ public class OnLogin implements Listener {
     @SneakyThrows
     @EventHandler
     public void onLogin(@NotNull final PlayerLoginEvent e) {
-        String name = e.getPlayer().getName();
+        // declare players name
+        final String name = e.getPlayer().getName();
 
-        File file = new File("plugins/JBan", "banned.yml");
-        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+        final File file = new File("plugins/JBan", "banned.yml");
+        final FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-        File fileTemp = new File("plugins/JBan", "tempBanned.yml");
-        FileConfiguration cfgTemp = YamlConfiguration.loadConfiguration(fileTemp);
+        final File fileTemp = new File("plugins/JBan", "tempBanned.yml");
+        final FileConfiguration cfgTemp = YamlConfiguration.loadConfiguration(fileTemp);
 
+        // check if player is banned
         if (cfg.getString(name) == null && cfgTemp.getString(name + ".reason") == null) {
             return;
         }
 
+        // check if player is just temporary banned
         if (cfgTemp.getString(name + ".reason") != null) {
             final String bannedPointString = cfgTemp.getString(name + ".bannedPoint");
             assert bannedPointString != null;
@@ -60,6 +63,7 @@ public class OnLogin implements Listener {
             return;
         }
 
+        // player is permanent banned
         e.disallow(
             PlayerLoginEvent.Result.KICK_BANNED,
             ChatColor.GRAY + "Du wurdest für " + ChatColor.DARK_RED.toString()
@@ -69,6 +73,13 @@ public class OnLogin implements Listener {
     }
     //</editor-fold>
 
+    /**
+     * Berechnet die {@link Duration Dauer}, zwischen einem gewissen {@link Instant} und jetzt.
+     *
+     * @param instant Der {@link Instant}, von dem die Dauer bis jetzt berechnet wird.
+     *
+     * @return Die {@link Duration Dauer} zwischen den beiden {@link Instant Instants}.
+     */
     private Duration getDuration(Instant instant) {
         return Duration.between(instant, Instant.now());
     }

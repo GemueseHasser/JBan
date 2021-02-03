@@ -42,14 +42,14 @@ public class Warn implements CommandExecutor {
             return true;
         }
 
-        Player target = Bukkit.getPlayer(args[0]);
+        final Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null || !target.isOnline()) {
             sender.sendMessage(PREFIX + "Der Spieler ist nicht online!");
             return true;
         }
 
-        StringBuilder reason = new StringBuilder();
+        final StringBuilder reason = new StringBuilder();
 
         for (int i = 1; i < args.length; i++) {
             reason.append(args[i]).append(" ");

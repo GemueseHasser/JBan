@@ -16,7 +16,7 @@ import java.io.File;
 import static de.jonas.JBan.PREFIX;
 
 /**
- * Implementiert den Command, mit dem {@link Player Spieler} gemuted werden.
+ * Implementiert den Command, mit dem {@link Player Spieler} permanent gemuted werden.
  */
 public class Mute implements CommandExecutor {
 
@@ -51,7 +51,7 @@ public class Mute implements CommandExecutor {
         }
 
         // declare muted Player
-        Player target = Bukkit.getPlayer(args[0]);
+        final Player target = Bukkit.getPlayer(args[0]);
 
         // check if muted player is online
         if (target == null || !target.isOnline()) {
@@ -59,10 +59,10 @@ public class Mute implements CommandExecutor {
             return true;
         }
 
-        File file = new File("plugins/JBan", "muted.yml");
-        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+        final File file = new File("plugins/JBan", "muted.yml");
+        final FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-        StringBuilder reason = new StringBuilder();
+        final StringBuilder reason = new StringBuilder();
 
         // form reason
         for (int i = 1; i < args.length; i++) {

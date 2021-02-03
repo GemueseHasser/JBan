@@ -16,10 +16,20 @@ import java.time.Instant;
 
 import static de.jonas.JBan.PREFIX;
 
+/**
+ * Implementiert den Command, mit dem {@link Player Spieler} für eine gewisse Zeit gemutet werden.
+ */
 public class TempMute implements CommandExecutor {
 
+    //<editor-fold desc="CONSTANTS">
+    /**
+     * Die Anzahl an leeren Nachrichten, die dem {@link Player Spieler} gesendet werden, bevor die Mute-Nachricht
+     * angezeigt wird.
+     */
     private static final int EMPTY_MESSAGES = 100;
+    //</editor-fold>
 
+    //<editor-fold desc="implementation">
     @Override
     @SneakyThrows
     public boolean onCommand(
@@ -40,27 +50,27 @@ public class TempMute implements CommandExecutor {
             return true;
         }
 
-        // declare muted player
-        Player target = Bukkit.getPlayer(args[0]);
+        // declare temporary-muted player
+        final Player target = Bukkit.getPlayer(args[0]);
 
         final double hours = Double.parseDouble(args[1].replace(",", "."));
 
-        // check if muted player is null
+        // check if temporary-muted player is null
         if (target == null || !target.isOnline()) {
             sender.sendMessage(PREFIX + "Der Spieler ist nicht online!");
             return true;
         }
 
-        StringBuilder reason = new StringBuilder();
+        final StringBuilder reason = new StringBuilder();
 
         // form reason
         for (int i = 2; i < args.length; i++) {
             reason.append(args[i]).append(" ");
         }
 
-        // write player into muted players
-        File file = new File("plugins/JBan", "tempMuted.yml");
-        FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+        // write player into temporary-muted players
+        final File file = new File("plugins/JBan", "tempMuted.yml");
+        final FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
         cfg.set(target.getName() + ".reason", reason.toString());
         cfg.set(target.getName() + ".mutePoint", Instant.now().toString());
         cfg.set(target.getName() + ".hours", hours);
@@ -84,4 +94,5 @@ public class TempMute implements CommandExecutor {
             + (hours == 1 ? " Stunde gemutet!" : " Stunden gemutet!"));
         return true;
     }
+    //</editor-fold>
 }
