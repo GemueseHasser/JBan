@@ -53,7 +53,7 @@ public class OnChat implements Listener {
                 e.getPlayer().sendMessage(
                     PREFIX + "Du wurdest für " + ChatColor.DARK_RED.toString()
                         + ChatColor.BOLD + cfgTemp.getString(name + ".reason")
-                        + ChatColor.GRAY + " für " + ChatColor.GRAY.toString() + ChatColor.BOLD
+                        + ChatColor.GRAY + "für " + ChatColor.GRAY.toString() + ChatColor.BOLD
                         + cfgTemp.getDouble(name + ".hours") + ChatColor.GRAY.toString() + ChatColor.BOLD + " "
                         + ChatColor.GRAY + (hours == 1 ? "Stunde gemutet!" : "Stunden gemutet!")
                 );

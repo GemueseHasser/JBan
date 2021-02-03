@@ -70,9 +70,8 @@ public class Ban implements CommandExecutor {
 
         // send done-message
         sender.sendMessage(PREFIX + "Du hast den Spieler " + target.getName()
-            + " für " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "\""
-            + reason + "\""
-            + ChatColor.DARK_RED.toString() + ChatColor.BOLD + " permanent " + ChatColor.GRAY + "gebannt!");
+            + " für " + ChatColor.DARK_RED.toString() + ChatColor.BOLD
+            + reason + "permanent " + ChatColor.GRAY + "gebannt!");
         return true;
     }
     //</editor-fold>
