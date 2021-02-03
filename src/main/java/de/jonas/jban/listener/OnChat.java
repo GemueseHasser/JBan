@@ -26,6 +26,7 @@ public class OnChat implements Listener {
     //<editor-fold desc="event-handling">
     @SneakyThrows
     @EventHandler
+    @SuppressWarnings("checkstyle:MultipleStringLiterals")
     public void onChat(@NotNull final AsyncPlayerChatEvent e) {
         // declare players name
         final String name = e.getPlayer().getName();
@@ -83,7 +84,7 @@ public class OnChat implements Listener {
      *
      * @return Die {@link Duration Dauer} zwischen den beiden {@link Instant Instants}.
      */
-    private Duration getDuration(Instant instant) {
+    private Duration getDuration(final Instant instant) {
         return Duration.between(instant, Instant.now());
     }
 

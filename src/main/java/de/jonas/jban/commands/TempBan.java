@@ -20,9 +20,17 @@ import static de.jonas.JBan.PREFIX;
  * Implementiert den Command, mit dem {@link Player Spieler} für eine gewisse Zeit gebannt werden.
  */
 public class TempBan implements CommandExecutor {
+
+    //<editor-fold desc="CONSTANTS">
+    /** Die minimale Argumenten-Länge, die man zum Ausführen dieses Commands braucht. */
+    private static final int MINIMUM_ARGS_LENGTH = 3;
+    //</editor-fold>
+
+
     //<editor-fold desc="implementation">
     @Override
     @SneakyThrows
+    @SuppressWarnings("checkstyle:MultipleStringLiterals")
     public boolean onCommand(
         @NotNull final CommandSender sender,
         @NotNull final Command cmd,
@@ -36,7 +44,7 @@ public class TempBan implements CommandExecutor {
         }
 
         // check the length of the command
-        if (args.length < 3) {
+        if (args.length < MINIMUM_ARGS_LENGTH) {
             sender.sendMessage(PREFIX + "Bitte benutze /tempban <Player> <hours> <Grund>");
             return true;
         }

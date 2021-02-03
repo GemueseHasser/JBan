@@ -24,6 +24,7 @@ public class OnLogin implements Listener {
     //<editor-fold desc="event-handling">
     @SneakyThrows
     @EventHandler
+    @SuppressWarnings("checkstyle:MultipleStringLiterals")
     public void onLogin(@NotNull final PlayerLoginEvent e) {
         // declare players name
         final String name = e.getPlayer().getName();
@@ -80,7 +81,7 @@ public class OnLogin implements Listener {
      *
      * @return Die {@link Duration Dauer} zwischen den beiden {@link Instant Instants}.
      */
-    private Duration getDuration(Instant instant) {
+    private Duration getDuration(final Instant instant) {
         return Duration.between(instant, Instant.now());
     }
 
