@@ -87,13 +87,13 @@ public class TempMute implements CommandExecutor {
 
         // send mute-message
         target.sendMessage(ChatColor.GRAY + "Du wurdest für " + ChatColor.DARK_RED.toString()
-            + ChatColor.BOLD + "\n" + reason + "\n" + ChatColor.GRAY + " für "
-            + ChatColor.DARK_RED.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
+            + ChatColor.BOLD + reason + ChatColor.GRAY + "für "
+            + ChatColor.GRAY.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
             + (hours == 1 ? " Stunde gemutet!" : " Stunden gemutet!"));
 
         // send done-message
         sender.sendMessage(PREFIX + ChatColor.GRAY + "Du hast den Spieler " + target.getName() + " für "
-            + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "\"" + reason + "\"" + ChatColor.GRAY
+            + ChatColor.DARK_RED.toString() + ChatColor.BOLD + reason + ChatColor.GRAY
             + " für " + ChatColor.GRAY.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
             + (hours == 1 ? " Stunde gemutet!" : " Stunden gemutet!"));
         return true;

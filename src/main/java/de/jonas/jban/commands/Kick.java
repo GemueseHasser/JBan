@@ -54,12 +54,12 @@ public class Kick implements CommandExecutor {
         // kick player
         target.kickPlayer(ChatColor.GRAY + "Du wurdest für "
             + ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + reason
-            + ChatColor.GRAY + " gekickt!");
+            + ChatColor.GRAY + "gekickt!");
 
         // send done-message
         sender.sendMessage(PREFIX + ChatColor.GRAY + "Du hast den Spieler " + target.getName() + " für "
             + ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + reason
-            + ChatColor.GRAY + " gekickt!");
+            + ChatColor.GRAY + "gekickt!");
 
         return true;
     }

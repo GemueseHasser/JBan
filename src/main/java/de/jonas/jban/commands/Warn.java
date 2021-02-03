@@ -61,7 +61,7 @@ public class Warn implements CommandExecutor {
         target.sendMessage(ChatColor.DARK_RED + "WARNUNG: " + ChatColor.RED + reason);
 
         sender.sendMessage(PREFIX + "Du hast den Spieler " + target.getName() + " gewarnt!"
-            + "(" + reason + ")");
+            + " >> " + reason);
 
         return true;
     }

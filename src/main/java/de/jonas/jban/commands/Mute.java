@@ -78,13 +78,13 @@ public class Mute implements CommandExecutor {
         }
 
         // send mute-message
-        target.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "Du wurdest für \n"
+        target.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "Du wurdest für\""
             + ChatColor.DARK_RED.toString() + ChatColor.BOLD + reason
-            + ChatColor.RED.toString() + ChatColor.BOLD + "\n gemutet!"
+            + ChatColor.RED.toString() + ChatColor.BOLD + "\" gemutet!"
         );
 
         // send done-message
-        sender.sendMessage(PREFIX + "Du hast den Spieler " + target.getName() + " für "
+        sender.sendMessage(PREFIX + "Du hast den Spieler " + target.getName() + " für"
             + ChatColor.DARK_GRAY + reason + ChatColor.GRAY + " gemutet!");
 
         return true;
