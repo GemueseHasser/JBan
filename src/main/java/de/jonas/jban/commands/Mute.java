@@ -1,5 +1,6 @@
 package de.jonas.jban.commands;
 
+import de.jonas.JBan;
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -40,13 +41,16 @@ public class Mute implements CommandExecutor {
     ) {
         // check if sender has required permission
         if (!sender.hasPermission("jban.mute")) {
-            sender.sendMessage(PREFIX + "Dazu hast du keine Rechte!");
+            sender.sendMessage(PREFIX + JBan.getInstance().getNoPermsMessage());
             return true;
         }
 
         // check command length
         if (args.length < 2) {
-            sender.sendMessage(PREFIX + "Bitte benutze /mute <Player> <Grund>");
+            sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+                "Bitte benutze /mute <Player> <Grund>",
+                "Please use /mute <Player> <Reason>"
+            ));
             return true;
         }
 
@@ -55,7 +59,7 @@ public class Mute implements CommandExecutor {
 
         // check if muted player is online
         if (target == null || !target.isOnline()) {
-            sender.sendMessage(PREFIX + "Der Spieler ist nicht online!");
+            sender.sendMessage(PREFIX + JBan.getInstance().getPlayerIsNotOnlineMessage());
             return true;
         }
 
@@ -78,14 +82,24 @@ public class Mute implements CommandExecutor {
         }
 
         // send mute-message
-        target.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "Du wurdest für"
-            + ChatColor.DARK_RED.toString() + ChatColor.BOLD + reason
-            + ChatColor.RED.toString() + ChatColor.BOLD + " permanent gemutet!"
-        );
+        target.sendMessage(JBan.getInstance().chooseCorrectLanguage(
+            ChatColor.RED.toString() + ChatColor.BOLD + "Du wurdest für"
+                + ChatColor.DARK_RED.toString() + ChatColor.BOLD + reason
+                + ChatColor.RED.toString() + ChatColor.BOLD + " permanent gemutet!",
+            ChatColor.RED.toString() + ChatColor.BOLD + "You were permanently muted for"
+                + ChatColor.DARK_RED.toString() + ChatColor.BOLD + reason + ChatColor.RED.toString()
+                + ChatColor.BOLD + "!"
+        ));
 
         // send done-message
-        sender.sendMessage(PREFIX + "Du hast den Spieler " + target.getName() + " für"
-            + ChatColor.DARK_GRAY + reason + ChatColor.GRAY + " gemutet!");
+        sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+            "Du hast den Spieler " + target.getName() + ChatColor.DARK_RED.toString() + ChatColor.BOLD
+                + "permanent" + ChatColor.GRAY + " für" + ChatColor.DARK_RED.toString() + ChatColor.BOLD + reason
+                + ChatColor.GRAY + " gemutet!",
+            "You have " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "permanently"
+                + ChatColor.GRAY + " muted the player " + target.getName() + " for" + ChatColor.DARK_RED.toString()
+                + ChatColor.BOLD + reason + ChatColor.GRAY + "!"
+        ));
 
         return true;
     }

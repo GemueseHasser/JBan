@@ -1,5 +1,6 @@
 package de.jonas.jban.listener;
 
+import de.jonas.JBan;
 import lombok.SneakyThrows;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -16,8 +17,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 /**
- * Das {@link Event Event}, mit dem das Joinen verhindert wird, wenn ein
- * {@link Player Spieler} gebannt ist.
+ * Das {@link Event Event}, mit dem das Joinen verhindert wird, wenn ein {@link Player Spieler} gebannt ist.
  */
 public class OnLogin implements Listener {
 
@@ -50,11 +50,18 @@ public class OnLogin implements Listener {
             if (duration < hours) {
                 e.disallow(
                     PlayerLoginEvent.Result.KICK_BANNED,
-                    ChatColor.GRAY + "Du wurdest für " + ChatColor.DARK_RED.toString()
-                        + ChatColor.BOLD + "\n" + cfgTemp.getString(name + ".reason") + "\n"
-                        + ChatColor.GRAY + " für " + ChatColor.GRAY.toString() + ChatColor.BOLD
-                        + cfgTemp.getDouble(name + ".hours") + ChatColor.GRAY.toString() + ChatColor.BOLD + " "
-                        + ChatColor.GRAY + (hours == 1 ? "Stunde gebannt!" : "Stunden gebannt!")
+                    JBan.getInstance().chooseCorrectLanguage(
+                        ChatColor.GRAY + "Du wurdest für " + ChatColor.DARK_RED.toString()
+                            + ChatColor.BOLD + "\n" + cfgTemp.getString(name + ".reason") + "\n"
+                            + ChatColor.GRAY + " für " + ChatColor.GRAY.toString() + ChatColor.BOLD
+                            + cfgTemp.getDouble(name + ".hours") + ChatColor.GRAY.toString() + ChatColor.BOLD + " "
+                            + ChatColor.GRAY + (hours == 1 ? "Stunde gebannt!" : "Stunden gebannt!"),
+                        ChatColor.GRAY + "You were banned for " + ChatColor.DARK_RED.toString()
+                            + ChatColor.BOLD + "\n" + cfgTemp.getString(name + ".reason") + "\n"
+                            + ChatColor.GRAY + " for " + ChatColor.GRAY.toString() + ChatColor.BOLD
+                            + cfgTemp.getDouble(name + ".hours") + ChatColor.GRAY.toString() + ChatColor.BOLD + " "
+                            + ChatColor.GRAY + (hours == 1 ? "hour!" : "hours!")
+                    )
                 );
             } else {
                 cfgTemp.set(name, null);
@@ -67,9 +74,14 @@ public class OnLogin implements Listener {
         // player is permanent banned
         e.disallow(
             PlayerLoginEvent.Result.KICK_BANNED,
+            JBan.getInstance().chooseCorrectLanguage(
             ChatColor.GRAY + "Du wurdest für " + ChatColor.DARK_RED.toString()
-            + ChatColor.BOLD + "\n" + cfg.getString(name) + "\n" + ChatColor.DARK_RED.toString()
-                + ChatColor.BOLD + "permanent " + ChatColor.GRAY + "gebannt!"
+                + ChatColor.BOLD + "\n" + cfg.getString(name) + "\n" + ChatColor.DARK_RED.toString()
+                + ChatColor.BOLD + "permanent " + ChatColor.GRAY + "gebannt!",
+                ChatColor.GRAY + "You were " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "permanently"
+                    + ChatColor.GRAY + "banned for " + ChatColor.DARK_RED.toString() + ChatColor.BOLD
+                    + "\n" + cfg.getString(name) + "\n" + ChatColor.DARK_RED.toString()
+            )
         );
     }
     //</editor-fold>

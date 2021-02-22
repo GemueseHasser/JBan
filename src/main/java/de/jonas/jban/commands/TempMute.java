@@ -1,5 +1,6 @@
 package de.jonas.jban.commands;
 
+import de.jonas.JBan;
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -44,13 +45,16 @@ public class TempMute implements CommandExecutor {
     ) {
         // check if sender has permissions
         if (!sender.hasPermission("jban.tempmute")) {
-            sender.sendMessage(PREFIX + "Dazu hast du keine Rechte!");
+            sender.sendMessage(PREFIX + JBan.getInstance().getNoPermsMessage());
             return true;
         }
 
         // check the length of the command
         if (args.length < MINIMUM_ARGS_LENGTH) {
-            sender.sendMessage(PREFIX + "Bitte benutze /tempmute <Player> <hours> <Grund>");
+            sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+                "Bitte benutze /tempmute <Player> <Stunden> <Grund>",
+                "Please use /tempmute <Player> <Hours> <Reason>"
+            ));
             return true;
         }
 
@@ -61,7 +65,7 @@ public class TempMute implements CommandExecutor {
 
         // check if temporary-muted player is null
         if (target == null || !target.isOnline()) {
-            sender.sendMessage(PREFIX + "Der Spieler ist nicht online!");
+            sender.sendMessage(PREFIX + JBan.getInstance().getPlayerIsNotOnlineMessage());
             return true;
         }
 
@@ -86,16 +90,28 @@ public class TempMute implements CommandExecutor {
         }
 
         // send mute-message
-        target.sendMessage(ChatColor.GRAY + "Du wurdest für " + ChatColor.DARK_RED.toString()
-            + ChatColor.BOLD + reason + ChatColor.GRAY + "für "
-            + ChatColor.GRAY.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
-            + (hours == 1 ? " Stunde gemutet!" : " Stunden gemutet!"));
+        target.sendMessage(JBan.getInstance().chooseCorrectLanguage(
+            ChatColor.GRAY + "Du wurdest für " + ChatColor.DARK_RED.toString()
+                + ChatColor.BOLD + "\n" + reason + "\n" + ChatColor.GRAY + " für "
+                + ChatColor.GRAY.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
+                + (hours == 1 ? " Stunde gemutet!" : " Stunden gemutet!"),
+            ChatColor.GRAY + "You were muted for " + ChatColor.DARK_RED.toString()
+                + ChatColor.BOLD + "\n" + reason + "\n" + ChatColor.GRAY + " for "
+                + ChatColor.GRAY.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
+                + (hours == 1 ? " hour!" : " hours!")
+        ));
 
         // send done-message
-        sender.sendMessage(PREFIX + ChatColor.GRAY + "Du hast den Spieler " + target.getName() + " für "
-            + ChatColor.DARK_RED.toString() + ChatColor.BOLD + reason + ChatColor.GRAY
-            + "für " + ChatColor.GRAY.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
-            + (hours == 1 ? " Stunde gemutet!" : " Stunden gemutet!"));
+        sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+            ChatColor.GRAY + "Du hast den Spieler " + target.getName() + " für "
+                + ChatColor.DARK_RED.toString() + ChatColor.BOLD + reason + ChatColor.GRAY
+                + "für " + ChatColor.GRAY.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
+                + (hours == 1 ? " Stunde gemutet!" : " Stunden gemutet!"),
+            ChatColor.GRAY + "You muted the player " + target.getName() + " for "
+                + ChatColor.DARK_RED.toString() + ChatColor.BOLD + reason + ChatColor.GRAY
+                + "for " + ChatColor.GRAY.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
+                + (hours == 1 ? " hour!" : " hours!")
+        ));
         return true;
     }
     //</editor-fold>

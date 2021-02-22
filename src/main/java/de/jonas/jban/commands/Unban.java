@@ -1,5 +1,6 @@
 package de.jonas.jban.commands;
 
+import de.jonas.JBan;
 import lombok.SneakyThrows;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -30,13 +31,16 @@ public class Unban implements CommandExecutor {
     ) {
         // check if sender has required permissions
         if (!sender.hasPermission("jban.unban")) {
-            sender.sendMessage(PREFIX + "Dazu hast du keine Rechte!");
+            sender.sendMessage(PREFIX + JBan.getInstance().getNoPermsMessage());
             return true;
         }
 
         // check command-length
         if (args.length != 1) {
-            sender.sendMessage(PREFIX + "Bitte benutze /unban <Player>");
+            sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+                "Bitte benutze /unban <Player>",
+                "Please use /unban <Player>"
+            ));
             return true;
         }
 
@@ -48,7 +52,10 @@ public class Unban implements CommandExecutor {
 
         // check if player is banned
         if (cfg.getString(args[0]) == null && cfgTemp.getString(args[0] + ".reason") == null) {
-            sender.sendMessage(PREFIX + "Der Spieler ist nicht gebannt!");
+            sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+                "Der Spieler ist nicht gebannt!",
+                "The player is not banned!"
+            ));
             return true;
         }
 
@@ -59,8 +66,10 @@ public class Unban implements CommandExecutor {
         cfgTemp.save(fileTemp);
 
         // send done-message
-        sender.sendMessage(PREFIX + "Du hast den Spieler " + ChatColor.DARK_GRAY + args[0]
-            + ChatColor.GRAY + " entbannt!");
+        sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+            "Du hast den Spieler " + ChatColor.DARK_GRAY + args[0] + ChatColor.GRAY + " entbannt!",
+            "you have unbanned the player " + ChatColor.DARK_GRAY + args[0] + ChatColor.GRAY + "!"
+        ));
 
         return true;
     }

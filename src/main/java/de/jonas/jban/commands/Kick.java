@@ -1,5 +1,6 @@
 package de.jonas.jban.commands;
 
+import de.jonas.JBan;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -25,13 +26,16 @@ public class Kick implements CommandExecutor {
     ) {
         // check if sender has required permissions
         if (!sender.hasPermission("jban.kick")) {
-            sender.sendMessage(PREFIX + "Dazu hast du keine Rechte!");
+            sender.sendMessage(PREFIX + JBan.getInstance().getNoPermsMessage());
             return true;
         }
 
         // check command-length
         if (args.length < 2) {
-            sender.sendMessage(PREFIX + "Bitte benutze /kick <Player> <Grund>");
+            sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+                "Bitte benutze /kick <Player> <Grund>",
+                "Please use /kick <Player> <Reason>"
+            ));
             return true;
         }
 
@@ -40,7 +44,7 @@ public class Kick implements CommandExecutor {
 
         // check if kicked player is online
         if (target == null || !target.isOnline()) {
-            sender.sendMessage(PREFIX + "Der Spieler ist nicht online!");
+            sender.sendMessage(PREFIX + JBan.getInstance().getPlayerIsNotOnlineMessage());
             return true;
         }
 
@@ -52,14 +56,22 @@ public class Kick implements CommandExecutor {
         }
 
         // kick player
-        target.kickPlayer(ChatColor.GRAY + "Du wurdest für "
-            + ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + reason
-            + ChatColor.GRAY + "gekickt!");
+        target.kickPlayer(JBan.getInstance().chooseCorrectLanguage(
+            ChatColor.GRAY + "Du wurdest für "
+                + ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + reason
+                + ChatColor.GRAY + "gekickt!",
+            ChatColor.GRAY + "You were kicked for " + ChatColor.DARK_GRAY.toString() + ChatColor.BOLD
+                + reason.substring(0, reason.length() - 1) + ChatColor.GRAY + "!"
+        ));
 
         // send done-message
-        sender.sendMessage(PREFIX + ChatColor.GRAY + "Du hast den Spieler " + target.getName() + " für "
-            + ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + reason
-            + ChatColor.GRAY + "gekickt!");
+        sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+            "Du hast den Spieler " + target.getName() + " für "
+                + ChatColor.DARK_GRAY.toString() + ChatColor.BOLD + reason
+                + ChatColor.GRAY + "gekickt!",
+            "You kicked the player " + target.getName() + " for " + ChatColor.DARK_GRAY.toString()
+                + ChatColor.BOLD + reason.substring(0, reason.length() - 1) + ChatColor.GRAY + "!"
+        ));
 
         return true;
     }

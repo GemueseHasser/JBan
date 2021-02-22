@@ -1,5 +1,6 @@
 package de.jonas.jban.listener;
 
+import de.jonas.JBan;
 import lombok.SneakyThrows;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -51,12 +52,18 @@ public class OnChat implements Listener {
             final double duration = (double) getDuration(mutedPoint).toMinutes() / 60D;
             if (duration < hours) {
                 e.getPlayer().sendMessage(
-                    PREFIX + "Du wurdest für " + ChatColor.DARK_RED.toString()
-                        + ChatColor.BOLD + cfgTemp.getString(name + ".reason")
-                        + ChatColor.GRAY + "für " + ChatColor.GRAY.toString() + ChatColor.BOLD
-                        + cfgTemp.getDouble(name + ".hours") + ChatColor.GRAY.toString() + ChatColor.BOLD + " "
-                        + ChatColor.GRAY + (hours == 1 ? "Stunde gemutet!" : "Stunden gemutet!")
-                );
+                    PREFIX + JBan.getInstance().chooseCorrectLanguage(
+                        "Du wurdest für " + ChatColor.DARK_RED.toString()
+                            + ChatColor.BOLD + cfgTemp.getString(name + ".reason")
+                            + ChatColor.GRAY + "für " + ChatColor.GRAY.toString() + ChatColor.BOLD
+                            + cfgTemp.getDouble(name + ".hours") + ChatColor.GRAY.toString() + ChatColor.BOLD + " "
+                            + ChatColor.GRAY + (hours == 1 ? "Stunde gemutet!" : "Stunden gemutet!"),
+                        "You were muted for " + ChatColor.DARK_RED.toString()
+                            + ChatColor.BOLD + cfgTemp.getString(name + ".reason")
+                            + ChatColor.GRAY + "for " + ChatColor.GRAY.toString() + ChatColor.BOLD
+                            + cfgTemp.getDouble(name + ".hours") + ChatColor.GRAY.toString() + ChatColor.BOLD + " "
+                            + ChatColor.GRAY + (hours == 1 ? "hour!" : "hours!")
+                    ));
                 e.setCancelled(true);
             } else {
                 cfgTemp.set(name, null);
@@ -69,11 +76,14 @@ public class OnChat implements Listener {
 
         // player is permanent muted
         e.setCancelled(true);
-        e.getPlayer().sendMessage(
-            PREFIX + "Du bist " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "permanent"
+        e.getPlayer().sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+            "Du bist " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "permanent"
                 + ChatColor.GRAY + " gemutet für" + ChatColor.DARK_RED.toString() + ChatColor.BOLD
+                + "\"" + reason + "\"",
+            "You are " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "permanently"
+                + ChatColor.GRAY + " muted for" + ChatColor.DARK_RED.toString() + ChatColor.BOLD
                 + "\"" + reason + "\""
-        );
+        ));
     }
     //</editor-fold>
 

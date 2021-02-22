@@ -1,5 +1,6 @@
 package de.jonas.jban.commands;
 
+import de.jonas.JBan;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -33,19 +34,22 @@ public class Warn implements CommandExecutor {
         @NotNull final String[] args
     ) {
         if (!sender.hasPermission("jban.warn")) {
-            sender.sendMessage(PREFIX + "Dazu hast du keine Rechte!");
+            sender.sendMessage(PREFIX + JBan.getInstance().getNoPermsMessage());
             return true;
         }
 
         if (args.length < 2) {
-            sender.sendMessage(PREFIX + "Bitte benutze /warn <Player> <Grund>");
+            sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+                "Bitte benutze /warn <Player> <Grund>",
+                "Please use /warn <Player> <Reason>"
+            ));
             return true;
         }
 
         final Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null || !target.isOnline()) {
-            sender.sendMessage(PREFIX + "Der Spieler ist nicht online!");
+            sender.sendMessage(PREFIX + JBan.getInstance().getPlayerIsNotOnlineMessage());
             return true;
         }
 
@@ -58,10 +62,15 @@ public class Warn implements CommandExecutor {
         for (int i1 = 0; i1 < EMPTY_MESSAGES; i1++) {
             target.sendMessage(" ");
         }
-        target.sendMessage(ChatColor.DARK_RED + "WARNUNG: " + ChatColor.RED + reason);
+        target.sendMessage(JBan.getInstance().chooseCorrectLanguage(
+            ChatColor.DARK_RED + "WARNUNG: " + ChatColor.RED + reason,
+            ChatColor.DARK_RED + "WARNING: " + ChatColor.RED + reason
+        ));
 
-        sender.sendMessage(PREFIX + "Du hast den Spieler " + target.getName() + " gewarnt!"
-            + " >> " + reason);
+        sender.sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
+            "Du hast den Spieler " + target.getName() + " gewarnt! >> " + reason,
+            "You warned the player " + target.getName() + "! >> " + reason
+        ));
 
         return true;
     }
