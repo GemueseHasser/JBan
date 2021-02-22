@@ -79,10 +79,10 @@ public class OnChat implements Listener {
         e.getPlayer().sendMessage(PREFIX + JBan.getInstance().chooseCorrectLanguage(
             "Du bist " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "permanent"
                 + ChatColor.GRAY + " gemutet für" + ChatColor.DARK_RED.toString() + ChatColor.BOLD
-                + "\"" + reason + "\"",
+                + reason,
             "You are " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "permanently"
                 + ChatColor.GRAY + " muted for" + ChatColor.DARK_RED.toString() + ChatColor.BOLD
-                + "\"" + reason + "\""
+                + reason
         ));
     }
     //</editor-fold>

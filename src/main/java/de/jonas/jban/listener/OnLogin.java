@@ -79,7 +79,7 @@ public class OnLogin implements Listener {
                 + ChatColor.BOLD + "\n" + cfg.getString(name) + "\n" + ChatColor.DARK_RED.toString()
                 + ChatColor.BOLD + "permanent " + ChatColor.GRAY + "gebannt!",
                 ChatColor.GRAY + "You were " + ChatColor.DARK_RED.toString() + ChatColor.BOLD + "permanently"
-                    + ChatColor.GRAY + "banned for " + ChatColor.DARK_RED.toString() + ChatColor.BOLD
+                    + ChatColor.GRAY + " banned for " + ChatColor.DARK_RED.toString() + ChatColor.BOLD
                     + "\n" + cfg.getString(name) + "\n" + ChatColor.DARK_RED.toString()
             )
         );

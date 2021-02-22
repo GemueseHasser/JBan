@@ -92,11 +92,11 @@ public class TempMute implements CommandExecutor {
         // send mute-message
         target.sendMessage(JBan.getInstance().chooseCorrectLanguage(
             ChatColor.GRAY + "Du wurdest für " + ChatColor.DARK_RED.toString()
-                + ChatColor.BOLD + "\n" + reason + "\n" + ChatColor.GRAY + " für "
+                + ChatColor.BOLD + reason + ChatColor.GRAY + "für "
                 + ChatColor.GRAY.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
                 + (hours == 1 ? " Stunde gemutet!" : " Stunden gemutet!"),
             ChatColor.GRAY + "You were muted for " + ChatColor.DARK_RED.toString()
-                + ChatColor.BOLD + "\n" + reason + "\n" + ChatColor.GRAY + " for "
+                + ChatColor.BOLD + reason + ChatColor.GRAY + "for "
                 + ChatColor.GRAY.toString() + ChatColor.BOLD + hours + ChatColor.GRAY
                 + (hours == 1 ? " hour!" : " hours!")
         ));
